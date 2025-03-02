@@ -7,8 +7,10 @@ exports.createPasswordResetToken = () => {
     .update(resetToken)
     .digest('hex');
 
-  const expirationTime = Date.now() + 10 * 60 * 1000; // 10 minutes
-  return { resetToken, hashedToken, expirationTime };
+  const expirationTime = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+  return {
+    resetToken,
+    hashedToken,
+    expirationTime: expirationTime.toISOString(),
+  };
 };
-
-module.exports = createPasswordResetToken;

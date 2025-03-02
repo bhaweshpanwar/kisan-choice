@@ -31,31 +31,13 @@ module.exports = class Email {
     });
   }
 
-  // async send(template, subject) {
-  //   const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
-  //     firstname: this.firstname,
-  //     url: this.url,
-  //     subject,
-  //   });
-
-  //   const mailOptions = {
-  //     from: this.from,
-  //     to: this.to,
-  //     subject,
-  //     html,
-  //     text: convert(html),
-  //   };
-
-  //   await this.newTransport().sendMail(mailOptions);
-  // }
-
   async send(template, subject) {
     try {
       const html = pug.renderFile(
-        `${__dirname}/../views/email/${template}.pug`,
+        `${__dirname}/../views/emails/${template}.pug`,
         {
           firstname: this.firstname,
-          url: this.url,
+          reset_url: this.url,
           subject,
         }
       );
@@ -72,7 +54,7 @@ module.exports = class Email {
       // console.log('✅ Email sent successfully!');
     } catch (err) {
       console.error('❌ Error sending email:', err);
-      throw new Error('Email sending failed!'); // Change this if you have a custom error handler
+      throw new Error('Email sending failed!');
     }
   }
 
@@ -82,34 +64,8 @@ module.exports = class Email {
 
   async sendPasswordReset() {
     await this.send(
-      'passwordReset',
-      'Your password reset token (valid for only 10 minutes)'
+      'resetLink',
+      'Password Reset Request - Kisan Choice (valid for only 10 minutes)'
     );
   }
 };
-
-// const sendEmail = async (options) => {
-//   // 1.Create Transporter
-//   // 2.Define the email options
-//   // 3.Actually Send the emails
-
-//   const transporter = nodemailer.createTransport({
-//     host: process.env.EMAIL_HOST,
-//     port: process.env.EMAIL_PORT,
-//     auth: {
-//       user: process.env.EMAIL_USERNAME,
-//       pass: process.env.EMAIL_PASSWORD,
-//     },
-//   });
-
-//   const mailOptions = {
-//     from: 'Bhawesh Panwar <hello@bhawesh.io>',
-//     to: options.email,
-//     subject: options.subject,
-//     text: options.message,
-//   };
-
-//   await transporter.sendMail(mailOptions);
-// };
-
-// module.exports = sendEmail;

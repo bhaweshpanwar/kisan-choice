@@ -1,3 +1,4 @@
+const { hash } = require('crypto');
 const pool = require('./../db/db');
 const AppError = require('./../utils/appError');
 
@@ -89,5 +90,27 @@ exports.findUserByEmail = async (email) => {
 exports.findUserById = async (id) => {
   const query = `SELECT id, name , email, password_changed_at,password,role,photo FROM public."users" WHERE id = $1 AND active = true;`;
   const result = await pool.query(query, [id]);
+  return result.rows[0];
+};
+
+exports.updatePasswordResetToken = async (
+  userID,
+  hashedToken,
+  expirationTime
+) => {
+  const query = `
+    UPDATE public."users"
+    SET password_reset_token = $1, password_reset_expires = $2
+    WHERE id = $3 AND active = true
+    RETURNING id,email;`;
+
+  const values = [hashedToken, expirationTime, userID];
+
+  const result = await pool.query(query, values);
+
+  if (result.rowCount === 0) {
+    throw new Error('Failed to save password reset token.');
+  }
+
   return result.rows[0];
 };
