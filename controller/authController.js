@@ -104,10 +104,9 @@ exports.signup = catchAsync(async (req, res, next) => {
     role: 'consumer',
   });
 
-  // const url = `${req.protocol}://${req.get('host')}/me`;
-  // // console.log(url);
-  // await new Email(result, url).sendWelcome();
+  const url = `${req.protocol}://${req.get('host')}/api/v1/users/login`;
 
+  await new Email(result, url).sendWelcome();
   this.createSendToken(result, 201, req, res);
 });
 

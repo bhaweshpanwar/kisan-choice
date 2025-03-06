@@ -26,6 +26,17 @@ app.use(cookieParser());
 app.use('/api/v1/users', userRouter);
 app.use('/auth', authRouter);
 
+//Routes i need to create
+// app.use('/api/v1/products', productRouter);
+// app.use('/api/v1/orders', orderRouter);
+// app.use('/api/v1/cart', cartRouter);
+// app.use('/api/v1/reviews', reviewRouter);
+// app.use('/api/v1/offers', offerRouter);
+// app.use('/api/v1/negotiations', negotiationRouter);
+// app.use('/api/v1/block', blockRouter);
+// app.use('/api/v1/payments', paymentRouter);
+// app.use('/api/v1/admin', adminRouter);
+
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });

@@ -99,7 +99,7 @@ html(xmlns='http://www.w3.org/1999/xhtml', xmlns:v='urn:schemas-microsoft-com:vm
             //[if mso | IE]>
                 /td
                 /tr
-            /table
+            //table
             table(align='center', border='0', cellpadding='0', cellspacing='0', style='width:600px;', width='600')
                 tr
                     td(style='line-height:0px;font-size:0px;mso-line-height-rule:exactly;')
@@ -125,7 +125,7 @@ html(xmlns='http://www.w3.org/1999/xhtml', xmlns:v='urn:schemas-microsoft-com:vm
                                                                 img(height='150px', src='./../../public/logos/kisan-choice-logo.png', style='border:0;display:block;outline:none;text-decoration:none;width:100%;', width='200')
                                         tr
                                             td(align='center', style='font-size:0px;padding:10px 25px;padding-bottom:40px;word-break:break-word;')
-                                                div(style="font-family: 'Helvetica Neue', Arial, sans-serif;font-size:28px;font-weight:bold;line-height:1;text-align:center;color:#555;") Welcome to Kisan Choice!
+                                                div(style="font-family: 'Helvetica Neue', Arial, sans-serif;font-size:28px;font-weight:bold;line-height:1;text-align:center;color:#555;") #{subject}
                                         tr
                                             td(align='left', style='font-size:0px;padding:10px 25px;word-break:break-word;')
                                                 div(style="font-family: 'Helvetica Neue', Arial, sans-serif;font-size:16px;line-height:22px;text-align:left;color:#555;") Hello #{name}!<br /><br />Thank you for joining Kisan Choice, where you can connect directly with farmers and access the freshest produce. We're excited to have you as part of our community!
@@ -137,7 +137,7 @@ html(xmlns='http://www.w3.org/1999/xhtml', xmlns:v='urn:schemas-microsoft-com:vm
                                                 table(align='center', border='0', cellpadding='0', cellspacing='0', role='presentation', style='border-collapse:separate;line-height:100%;')
                                                     tr
                                                         td(align='center', bgcolor='#000000', role='presentation', style='border:none;border-radius:3px;color:#ffffff;cursor:auto;padding:15px 25px;', valign='middle')
-                                                            a(href='#{login_url}', style="background:#000000;color:#ffffff;font-family:'Helvetica Neue', Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;display:block;") Login to Your Account
+                                                            a(href=reset_url, style="background:#000000;color:#ffffff;font-family:'Helvetica Neue', Arial, sans-serif;font-size:15px;font-weight:normal;line-height:120%;margin:0;text-decoration:none;text-transform:none;display:block;") Login to Your Account
                                         tr
                                             td(align='left', style='font-size:0px;padding:10px 25px;word-break:break-word;')
                                                 div(style="font-family: 'Helvetica Neue', Arial, sans-serif;font-size:14px;line-height:20px;text-align:left;color:#525252;") Best regards,<br /><br />Bhawesh Panwar<br />Kisan Choice<br />Indore, India
@@ -151,43 +151,43 @@ html(xmlns='http://www.w3.org/1999/xhtml', xmlns:v='urn:schemas-microsoft-com:vm
                                 //<![endif]
                                 //[if mso | IE]>
                                     /td
-                /tr
-                                /table
-                                table(align='center', border='0', cellpadding='0', cellspacing='0', style='width:600px;', width='600')
-                                    tr
-                                        td(style='line-height:0px;font-size:0px;mso-line-height-rule:exactly;')
-                                //<![endif]
-                                div(style='margin:0px auto;max-width:600px;')
-                                    table(align='center', border='0', cellpadding='0', cellspacing='0', role='presentation', style='width:100%;')
-                                        tbody
-                                            tr
-                                                td(style='direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;')
-                                                    //[if mso | IE]>
-                                                        table(role='presentation', border='0', cellpadding='0', cellspacing='0')
-                                                            tr
-                                                                td(style='vertical-align:bottom;width:600px;')
-                                                    //<![endif]
-                                                    div(class='mj-column-per-100 outlook-group-fix', style='font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%;')
-                                                        table(border='0', cellpadding='0', cellspacing='0', role='presentation', width='100%')
-                                                            tbody
+
+                    //table
+                    table(align='center', border='0', cellpadding='0', cellspacing='0', style='width:600px;', width='600')
+                        tr
+                            td(style='line-height:0px;font-size:0px;mso-line-height-rule:exactly;')
+                    //<![endif]
+                    div(style='margin:0px auto;max-width:600px;')
+                        table(align='center', border='0', cellpadding='0', cellspacing='0', role='presentation', style='width:100%;')
+                            tbody
+                                tr
+                                    td(style='direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;')
+                                        //[if mso | IE]>
+                                            table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+                                                tr
+                                                    td(style='vertical-align:bottom;width:600px;')
+                                        //<![endif]
+                                        div(class='mj-column-per-100 outlook-group-fix', style='font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%;')
+                                            table(border='0', cellpadding='0', cellspacing='0', role='presentation', width='100%')
+                                                tbody
+                                                    tr
+                                                        td(style='vertical-align:bottom;padding:0;')
+                                                            table(border='0', cellpadding='0', cellspacing='0', role='presentation', width='100%')
                                                                 tr
-                                                                    td(style='vertical-align:bottom;padding:0;')
-                                                                        table(border='0', cellpadding='0', cellspacing='0', role='presentation', width='100%')
-                                                                            tr
-                                                                                td(align='center', style='font-size:0px;padding:0;word-break:break-word;')
-                                                                                    div(style="font-family: 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:300;line-height:1;text-align:center;color:#575757;") Kisan Choice, Indore, India
-                                                                            tr
-                                                                                td(align='center', style='font-size:0px;padding:10px;word-break:break-word;')
-                                                                                    div(style="font-family: 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:300;line-height:1;text-align:center;color:#575757;")
-                                                                                        a(href='#{unsubscribe_url}', style='color:#575757') Unsubscribe
-                                                                                        |  from our emails
-                                                    //[if mso | IE]>
-                                                        /td
-                                                            /tr
-                                                        /table
-                                                    //<![endif]
-                                                    //[if mso | IE]>
-                                                        /td
-                                    /tr
-                                                    /table
-                                                    //<![endif]
+                                                                    td(align='center', style='font-size:0px;padding:0;word-break:break-word;')
+                                                                        div(style="font-family: 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:300;line-height:1;text-align:center;color:#575757;") Kisan Choice, Indore, India
+                                                                tr
+                                                                    td(align='center', style='font-size:0px;padding:10px;word-break:break-word;')
+                                                                        div(style="font-family: 'Helvetica Neue', Arial, sans-serif;font-size:12px;font-weight:300;line-height:1;text-align:center;color:#575757;")
+                                                                            a(href='#{unsubscribe_url}', style='color:#575757') Unsubscribe
+                                                                            |  from our emails
+                                        //[if mso | IE]>
+                                            /td
+                                                /tr
+                                            /table
+                                        //<![endif]
+                                        //[if mso | IE]>
+                                            /td
+                                //tr
+                            //table
+                            //<![endif]
