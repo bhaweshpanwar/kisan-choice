@@ -1,5 +1,5 @@
 const express = require('express');
-// const userController = require('./../controllers/userController');
+const userController = require('./../controller/userController');
 const authController = require('./../controller/authController');
 
 const router = express.Router();
@@ -13,6 +13,8 @@ router.patch('/resetPassword/:token', authController.resetPassword);
 
 // Protect all routes after this middleware
 router.use(authController.protect);
+
+router.patch('/become-farmer', userController.becomeFarmer);
 
 router.patch('/updatePassword', authController.updatePassword);
 // router.get('/me', userController.getMe, userController.getUser);
