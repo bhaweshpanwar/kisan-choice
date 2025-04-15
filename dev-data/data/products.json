@@ -1,0 +1,486 @@
+{
+  "products": [
+    {
+      "name": "Wheat",
+      "seller_id": "2502b2a8-5cf2-44d9-8deb-c9565feea69b",
+      "price": 2450,
+      "stock_quantity": 500,
+      "category": "8ffd9949-d1fb-43c7-b833-63db38c63ddb",
+      "negotiate": true,
+      "description": "Premium Sharbati wheat grown in Punjab's fertile soil. Rich in gluten (14% protein) with golden-brown grains. Ideal for chapatis, produces soft texture with good elasticity. Harvested at optimal maturity and sun-dried naturally. Stored in moisture-proof facilities to prevent fungus.",
+      "key_highlights": [
+        "A2 variety wheat",
+        "Minimal broken grains",
+        "No artificial polishing"
+      ],
+      "min_qty": 10,
+      "max_qty": 100,
+      "verified": true
+    },
+    {
+      "name": "Moong dal",
+      "seller_id": "2502b2a8-5cf2-44d9-8deb-c9565feea69b",
+      "price": 125,
+      "stock_quantity": 300,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Organic split green gram with bright yellow color. Quick-cooking (15 mins) with high protein content (24g/100g). Grown without chemical pesticides. Perfect for khichdi, sprouts or dal. Each batch tested for aflatoxin levels.",
+      "key_highlights": ["Non-GMO", "Rich in folate", "Low glycemic index"],
+      "min_qty": 5,
+      "max_qty": 50,
+      "verified": true
+    },
+    {
+      "name": "Tur dal",
+      "seller_id": "2502b2a8-5cf2-44d9-8deb-c9565feea69b",
+      "price": 180,
+      "stock_quantity": 250,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Traditional pigeon pea with rich aroma. Cooks in 20 mins to perfect consistency for sambar. Contains essential amino acids lysine & tryptophan. Stone-picked to remove impurities. Shelf life 12 months in airtight containers.",
+      "key_highlights": [
+        "No artificial color",
+        "Uniform grain size",
+        "Iron-rich"
+      ],
+      "min_qty": 5,
+      "max_qty": 40,
+      "verified": true
+    },
+    {
+      "name": "Rice",
+      "seller_id": "5a23a2d0-2aab-407e-afd3-8cb9fde117c3",
+      "price": 65,
+      "stock_quantity": 1000,
+      "category": "8ffd9949-d1fb-43c7-b833-63db38c63ddb",
+      "negotiate": true,
+      "description": "Gujarati Kolam rice with medium grain length. Non-sticky texture ideal for daily meals. Aged for 6 months for reduced moisture content. Cooks fluffy with distinct aroma. Perfect for pulao, biryani or steamed rice.",
+      "key_highlights": [
+        "Low arsenic content",
+        "Easy to digest",
+        "Less breakage"
+      ],
+      "min_qty": 5,
+      "max_qty": 100,
+      "verified": true
+    },
+    {
+      "name": "Masoor dal",
+      "seller_id": "5a23a2d0-2aab-407e-afd3-8cb9fde117c3",
+      "price": 110,
+      "stock_quantity": 350,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Skinless red lentils with quick cooking time (12 mins). Rich source of plant-based iron (6.5mg/100g). Grown organically in Saurashtra region. Turns golden when cooked with mild earthy flavor. No added preservatives.",
+      "key_highlights": [
+        "High iron content",
+        "Vegan protein source",
+        "No artificial colors"
+      ],
+      "min_qty": 2,
+      "max_qty": 30,
+      "verified": true
+    },
+    {
+      "name": "Chana dal",
+      "seller_id": "5a23a2d0-2aab-407e-afd3-8cb9fde117c3",
+      "price": 85,
+      "stock_quantity": 400,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Split Bengal gram with golden-yellow hue. High fiber content aids digestion. Slow-release carbohydrates provide sustained energy. Perfect for dal, snacks like chakli or sweets. Contains essential minerals like zinc and magnesium.",
+      "key_highlights": [
+        "Stone-ground",
+        "No artificial polishing",
+        "Rich in folate"
+      ],
+      "min_qty": 3,
+      "max_qty": 25,
+      "verified": true
+    },
+    {
+      "name": "Wheat",
+      "seller_id": "62118672-b93f-4eb9-a753-e1e3aaf2d1c1",
+      "price": 2350,
+      "stock_quantity": 600,
+      "category": "8ffd9949-d1fb-43c7-b833-63db38c63ddb",
+      "negotiate": true,
+      "description": "MP Sharbati wheat with high gluten content. Produces elastic dough perfect for tandoori rotis. Grown in Gangetic plains with organic manure. Grains have natural shine with 12% moisture content. Milled to preserve bran layer nutrients.",
+      "key_highlights": [
+        "High water absorption",
+        "Long shelf life",
+        "Minimal processing"
+      ],
+      "min_qty": 10,
+      "max_qty": 150,
+      "verified": true
+    },
+    {
+      "name": "Tur dal",
+      "seller_id": "62118672-b93f-4eb9-a753-e1e3aaf2d1c1",
+      "price": 175,
+      "stock_quantity": 200,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Hybrid Toor dal variety with 25% protein content. Cooks faster than traditional varieties (18 mins). Grown with drip irrigation for water efficiency. Perfect balance of texture - neither too mushy nor too hard when cooked.",
+      "key_highlights": [
+        "High-yield variety",
+        "Rich in potassium",
+        "No added sulfites"
+      ],
+      "min_qty": 5,
+      "max_qty": 30,
+      "verified": true
+    },
+    {
+      "name": "Urad dal",
+      "seller_id": "62118672-b93f-4eb9-a753-e1e3aaf2d1c1",
+      "price": 150,
+      "stock_quantity": 180,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Whole black gram with intact husk. Essential for authentic dal makhani. Requires soaking but develops deep flavor. High in resistant starch - good for gut health. Traditional stone-milling preserves nutrients.",
+      "key_highlights": [
+        "Aged for flavor",
+        "High magnesium content",
+        "No artificial bleaching"
+      ],
+      "min_qty": 3,
+      "max_qty": 20,
+      "verified": true
+    },
+
+    {
+      "name": "Rice",
+      "seller_id": "7d0fd43e-fb61-42f6-b19b-1ad668cdb683",
+      "price": 55,
+      "stock_quantity": 800,
+      "category": "8ffd9949-d1fb-43c7-b833-63db38c63ddb",
+      "negotiate": true,
+      "description": "Sona Masuri variety grown in Bihar's alluvial soil. Medium grain with slight stickiness when cooked. Economical daily rice with good nutritional value. Parboiled for higher vitamin retention. Ideal for khichdi or fried rice preparations.",
+      "key_highlights": [
+        "Quick cooking",
+        "High thiamine content",
+        "Less breakage"
+      ],
+      "min_qty": 5,
+      "max_qty": 50,
+      "verified": false
+    },
+    {
+      "name": "Moong dal",
+      "seller_id": "7d0fd43e-fb61-42f6-b19b-1ad668cdb683",
+      "price": 120,
+      "stock_quantity": 250,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Split yellow moong with quick cooking properties. Lightest of all dals - easy on digestion. Perfect for convalescent diets. Grown using natural farming methods. Cooks to creamy consistency in 15 minutes.",
+      "key_highlights": [
+        "Low flatulence",
+        "High bioavailability",
+        "No added chemicals"
+      ],
+      "min_qty": 2,
+      "max_qty": 25,
+      "verified": false
+    },
+    {
+      "name": "White Urad dal",
+      "seller_id": "7d0fd43e-fb61-42f6-b19b-1ad668cdb683",
+      "price": 160,
+      "stock_quantity": 150,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Skinless white urad dal for idli/dosa batter. High protein content supports muscle growth. Ferments well due to natural microflora. Stone-ground for traditional texture. Contains essential B-vitamins for energy metabolism.",
+      "key_highlights": [
+        "Consistent fermentation",
+        "High calcium content",
+        "Unpolished"
+      ],
+      "min_qty": 2,
+      "max_qty": 15,
+      "verified": false
+    },
+    {
+      "name": "Wheat",
+      "seller_id": "d457f88c-1828-4d90-8fab-308c334a527e",
+      "price": 2420,
+      "stock_quantity": 450,
+      "category": "8ffd9949-d1fb-43c7-b833-63db38c63ddb",
+      "negotiate": true,
+      "description": "HD-2967 variety wheat with high milling yield. Produces 72% extraction rate flour. Golden amber grains with 13% protein content. Grown using integrated pest management. Excellent for industrial flour production.",
+      "key_highlights": [
+        "High extraction rate",
+        "Uniform grain size",
+        "Low moisture"
+      ],
+      "min_qty": 15,
+      "max_qty": 120,
+      "verified": true
+    },
+    {
+      "name": "Chana dal",
+      "seller_id": "d457f88c-1828-4d90-8fab-308c334a527e",
+      "price": 90,
+      "stock_quantity": 220,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Premium split chickpeas with bright color. Rich source of zinc for immunity. Contains slow-digesting carbs for diabetics. Perfect for snacks like sev or dal. Processed in hygienic peeling units.",
+      "key_highlights": [
+        "High zinc content",
+        "Low glycemic index",
+        "No artificial colors"
+      ],
+      "min_qty": 4,
+      "max_qty": 30,
+      "verified": true
+    },
+    {
+      "name": "Masoor dal",
+      "seller_id": "d457f88c-1828-4d90-8fab-308c334a527e",
+      "price": 115,
+      "stock_quantity": 180,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Orange-red lentils that cook fastest (10 mins). Rich in antioxidants like polyphenols. Doesnt require soaking. Perfect for soups and stews. Contains essential amino acids missing in rice/wheat.",
+      "key_highlights": [
+        "Quickest cooking",
+        "Rich in antioxidants",
+        "No preservatives"
+      ],
+      "min_qty": 3,
+      "max_qty": 20,
+      "verified": true
+    },
+    {
+      "name": "Moong dal",
+      "seller_id": "ab36a304-6531-41dc-b89c-ce83c4c4aa3e",
+      "price": 130,
+      "stock_quantity": 280,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Desi variety moong grown in arid climate. Develops superior flavor profile. Rich in bioactive compounds. Requires slightly longer cooking but better texture. Organic certification ensures no chemical residues.",
+      "key_highlights": [
+        "Traditional variety",
+        "Higher phytochemicals",
+        "Certified organic"
+      ],
+      "min_qty": 4,
+      "max_qty": 35,
+      "verified": true
+    },
+    {
+      "name": "Tur dal",
+      "seller_id": "ab36a304-6531-41dc-b89c-ce83c4c4aa3e",
+      "price": 185,
+      "stock_quantity": 150,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Marathwada variety Toor dal with thick grains. Holds shape well in sambar. Naturally drought-resistant crop. Contains complex carbs for sustained energy. Stone-picked to remove damaged grains.",
+      "key_highlights": [
+        "Drought-resistant",
+        "Rich texture",
+        "Traditional farming"
+      ],
+      "min_qty": 5,
+      "max_qty": 25,
+      "verified": true
+    },
+    {
+      "name": "Rice",
+      "seller_id": "ab36a304-6531-41dc-b89c-ce83c4c4aa3e",
+      "price": 70,
+      "stock_quantity": 350,
+      "category": "8ffd9949-d1fb-43c7-b833-63db38c63ddb",
+      "negotiate": true,
+      "description": "Indrayani rice grown with limited irrigation. Short grain with slight stickiness. Perfect for kheer or modak. Develops glossy texture when cooked. Contains essential B-complex vitamins.",
+      "key_highlights": [
+        "Sweet flavor",
+        "Good for desserts",
+        "High carbohydrate"
+      ],
+      "min_qty": 5,
+      "max_qty": 40,
+      "verified": true
+    },
+    {
+      "name": "Rice",
+      "seller_id": "9289b2a6-55fd-4fb9-86b4-30875cc70c20",
+      "price": 75,
+      "stock_quantity": 900,
+      "category": "8ffd9949-d1fb-43c7-b833-63db38c63ddb",
+      "negotiate": true,
+      "description": "Sona Masuri premium variety from Godavari delta. Extra-long grains that elongate further when cooked. Distinct aroma and fluffy texture. Aged naturally for 8 months for enhanced taste.",
+      "key_highlights": ["2x elongation", "Aromatic", "Low breakage"],
+      "min_qty": 5,
+      "max_qty": 100,
+      "verified": true
+    },
+    {
+      "name": "Urad dal",
+      "seller_id": "9289b2a6-55fd-4fb9-86b4-30875cc70c20",
+      "price": 155,
+      "stock_quantity": 200,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Black gram dal for authentic Andhra meals. Essential for pesarattu and vada. High mucilage content aids digestion. Traditionally sun-dried for better fermentation properties.",
+      "key_highlights": [
+        "High mucilage",
+        "Good fermentation",
+        "Traditional processing"
+      ],
+      "min_qty": 3,
+      "max_qty": 25,
+      "verified": true
+    },
+    {
+      "name": "White Urad dal",
+      "seller_id": "9289b2a6-55fd-4fb9-86b4-30875cc70c20",
+      "price": 170,
+      "stock_quantity": 120,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Skinless white variety for idli/dosa. Finest quality with quick fermentation. Produces soft, spongy texture. Contains natural yeasts for consistent rising. No artificial fermentation aids added.",
+      "key_highlights": [
+        "Quick fermentation",
+        "Consistent results",
+        "No additives"
+      ],
+      "min_qty": 2,
+      "max_qty": 15,
+      "verified": true
+    },
+    {
+      "name": "Tur dal",
+      "price": 190,
+      "stock_quantity": 100,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Kerala special small-grain tuvar dal. Essential for sambar and aviyal. Cooks to perfect consistency in coconut-based gravies. Grown in laterite soil giving unique flavor. Sun-dried on bamboo mats.",
+      "key_highlights": [
+        "Small grain variety",
+        "Traditional taste",
+        "No artificial polishing"
+      ],
+      "min_qty": 2,
+      "max_qty": 15,
+      "verified": false
+    },
+    {
+      "name": "Chana dal",
+      "price": 95,
+      "stock_quantity": 150,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Split chickpeas for Kerala-style thoran. Contains higher fiber than rice. Perfect crunchy texture when roasted. Rich in manganese for bone health. Processed in small batches for quality control.",
+      "key_highlights": [
+        "High fiber",
+        "Crunchy texture",
+        "Small batch processing"
+      ],
+      "min_qty": 2,
+      "max_qty": 20,
+      "verified": false
+    },
+    {
+      "name": "Masoor dal",
+      "price": 105,
+      "stock_quantity": 120,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Red lentils for Kerala's comfort foods. Quick-cooking for busy households. Blends well with coconut and spices. Contains heart-healthy nutrients. Grown in organic homestead gardens.",
+      "key_highlights": ["Quick cooking", "Heart healthy", "Homestead grown"],
+      "min_qty": 1,
+      "max_qty": 10,
+      "verified": false
+    },
+    {
+      "name": "Rice",
+      "price": 80,
+      "stock_quantity": 700,
+      "category": "8ffd9949-d1fb-43c7-b833-63db38c63ddb",
+      "negotiate": true,
+      "description": "Ponni rice from Cauvery delta. Semi-polished retaining nutrients. Perfect for South Indian meals. Slightly sticky texture ideal for scooping sambar. Aged for minimum 4 months for reduced moisture.",
+      "key_highlights": [
+        "Cauvery delta rice",
+        "Semi-polished",
+        "Aged naturally"
+      ],
+      "min_qty": 5,
+      "max_qty": 80,
+      "verified": true
+    },
+    {
+      "name": "Moong dal",
+      "price": 135,
+      "stock_quantity": 180,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Whole green gram for Sundal preparations. High protein snack option. Sprouts easily within 24 hours. Rich in enzymes that aid digestion. Grown using natural farming techniques.",
+      "key_highlights": [
+        "High sprouting rate",
+        "Rich in enzymes",
+        "No chemicals"
+      ],
+      "min_qty": 3,
+      "max_qty": 25,
+      "verified": true
+    },
+    {
+      "name": "Urad dal",
+      "price": 165,
+      "stock_quantity": 150,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Black gram for authentic idli/dosa batter. High mucilage content gives soft texture. Traditional stone grinding available on request. Contains natural probiotics for gut health.",
+      "key_highlights": [
+        "Authentic texture",
+        "Stone grinding option",
+        "Probiotic"
+      ],
+      "min_qty": 3,
+      "max_qty": 20,
+      "verified": true
+    },
+    {
+      "name": "Wheat",
+      "price": 2380,
+      "stock_quantity": 400,
+      "category": "8ffd9949-d1fb-43c7-b833-63db38c63ddb",
+      "negotiate": true,
+      "description": "Nashik's famous medium-hard wheat. Perfect balance of gluten for rotis. Grown using organic compost. Grains have uniform size and deep amber color. Produces flour with excellent water absorption.",
+      "key_highlights": ["Medium gluten", "Uniform grains", "Organic compost"],
+      "min_qty": 10,
+      "max_qty": 90,
+      "verified": true
+    },
+    {
+      "name": "Tur dal",
+      "price": 195,
+      "stock_quantity": 120,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": false,
+      "description": "Maharashtra's preferred tur dal variety. Essential for varan bhat. Thick grains hold shape in cooking. Rich source of vegetarian protein. Contains essential minerals like potassium and magnesium.",
+      "key_highlights": [
+        "Thick grains",
+        "High potassium",
+        "Traditional variety"
+      ],
+      "min_qty": 3,
+      "max_qty": 20,
+      "verified": true
+    },
+    {
+      "name": "White Urad dal",
+      "price": 175,
+      "stock_quantity": 100,
+      "category": "a594104a-95b2-49fe-bff2-7f00fd45fa6a",
+      "negotiate": true,
+      "description": "Skinless urad for Maharashtrian specialties. Essential for amti, usal. Produces creamy texture in dals. High in protein and complex carbs. Small batch processed for quality assurance.",
+      "key_highlights": ["Creamy texture", "Small batches", "High protein"],
+      "min_qty": 2,
+      "max_qty": 15,
+      "verified": true
+    }
+  ]
+}

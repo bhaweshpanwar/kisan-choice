@@ -1,0 +1,403 @@
+[
+  {
+    "name": "Rajesh Kumar",
+    "email": "rajeshkumar@gmail.com",
+    "mobile": "9876543210",
+    "password": "Rajeshkumar@123",
+    "confirmPassword": "Rajeshkumar@123",
+    "photo": "/public/img/users/rajeshkumar.png"
+  },
+  {
+    "name": "Priya Patel",
+    "email": "priyapatel@gmail.com",
+    "mobile": "9876543211",
+    "password": "Priyapatel@123",
+    "confirmPassword": "Priyapatel@123",
+    "photo": "/public/img/users/priyapatel.png"
+  },
+  {
+    "name": "Vijay Singh",
+    "email": "vijaysingh@gmail.com",
+    "mobile": "9876543212",
+    "password": "Vijaysingh@123",
+    "confirmPassword": "Vijaysingh@123",
+    "photo": "/public/img/users/vijaysingh.png"
+  },
+  {
+    "name": "Sunita Devi",
+    "email": "sunitadevi@gmail.com",
+    "mobile": "9876543213",
+    "password": "Sunitadevi@123",
+    "confirmPassword": "Sunitadevi@123",
+    "photo": "/public/img/users/sunitadevi.png"
+  },
+  {
+    "name": "Arun Yadav",
+    "email": "arunyadav@gmail.com",
+    "mobile": "9876543214",
+    "password": "Arunyadav@123",
+    "confirmPassword": "Arunyadav@123",
+    "photo": "/public/img/users/arunyadav.png"
+  },
+  {
+    "name": "Meena Sharma",
+    "email": "meenasharma@gmail.com",
+    "mobile": "9876543215",
+    "password": "Meenasharma@123",
+    "confirmPassword": "Meenasharma@123",
+    "photo": "/public/img/users/meenasharma.png"
+  },
+  {
+    "name": "Sanjay Reddy",
+    "email": "sanjayreddy@gmail.com",
+    "mobile": "9876543216",
+    "password": "Sanjayreddy@123",
+    "confirmPassword": "Sanjayreddy@123",
+    "photo": "/public/img/users/sanjayreddy.png"
+  },
+  {
+    "name": "Kavita Nair",
+    "email": "kavitanair@gmail.com",
+    "mobile": "9876543217",
+    "password": "Kavitanair@123",
+    "confirmPassword": "Kavitanair@123",
+    "photo": "/public/img/users/kavitanair.png"
+  },
+  {
+    "name": "Ramesh Iyer",
+    "email": "rameshier@gmail.com",
+    "mobile": "9876543218",
+    "password": "Rameshier@123",
+    "confirmPassword": "Rameshier@123",
+    "photo": "/public/img/users/rameshier.png"
+  },
+  {
+    "name": "Anjali Deshmukh",
+    "email": "anjalideshmukh@gmail.com",
+    "mobile": "9876543219",
+    "password": "Anjalideshmukh@123",
+    "confirmPassword": "Anjalideshmukh@123",
+    "photo": "/public/img/users/anjalideshmukh.png"
+  },
+  {
+    "name": "Manoj Tiwari",
+    "email": "manojtiwari@gmail.com",
+    "mobile": "9876543220",
+    "password": "Manojtiwari@123",
+    "confirmPassword": "Manojtiwari@123",
+    "photo": "/public/img/users/manojtiwari.png"
+  },
+  {
+    "name": "Sangeeta Choudhary",
+    "email": "sangeetachoudhary@gmail.com",
+    "mobile": "9876543221",
+    "password": "Sangeetachoudhary@123",
+    "confirmPassword": "Sangeetachoudhary@123",
+    "photo": "/public/img/users/sangeetachoudhary.png"
+  },
+  {
+    "name": "Amit Joshi",
+    "email": "amitjoshi@gmail.com",
+    "mobile": "9876543222",
+    "password": "Amitjoshi@123",
+    "confirmPassword": "Amitjoshi@123",
+    "photo": "/public/img/users/amitjoshi.png"
+  },
+  {
+    "name": "Lata Kumari",
+    "email": "latakumari@gmail.com",
+    "mobile": "9876543223",
+    "password": "Latakumari@123",
+    "confirmPassword": "Latakumari@123",
+    "photo": "/public/img/users/latakumari.png"
+  },
+  {
+    "name": "Deepak Malhotra",
+    "email": "deepakmalhotra@gmail.com",
+    "mobile": "9876543224",
+    "password": "Deepakmalhotra@123",
+    "confirmPassword": "Deepakmalhotra@123",
+    "photo": "/public/img/users/deepakmalhotra.png"
+  },
+  {
+    "name": "Rekha Naik",
+    "email": "rekhaNaik@gmail.com",
+    "mobile": "9876543225",
+    "password": "RekhaNaik@123",
+    "confirmPassword": "RekhaNaik@123",
+    "photo": "/public/img/users/rekhanaik.png"
+  },
+  {
+    "name": "Suresh Gowda",
+    "email": "sureshgowda@gmail.com",
+    "mobile": "9876543226",
+    "password": "Sureshgowda@123",
+    "confirmPassword": "Sureshgowda@123",
+    "photo": "/public/img/users/sureshgowda.png"
+  },
+  {
+    "name": "Pooja Mehta",
+    "email": "poojamehta@gmail.com",
+    "mobile": "9876543227",
+    "password": "Poojamehta@123",
+    "confirmPassword": "Poojamehta@123",
+    "photo": "/public/img/users/poojamehta.png"
+  },
+  {
+    "name": "Harish Shetty",
+    "email": "harishshetty@gmail.com",
+    "mobile": "9876543228",
+    "password": "Harishshetty@123",
+    "confirmPassword": "Harishshetty@123",
+    "photo": "/public/img/users/harishshetty.png"
+  },
+  {
+    "name": "Neha Banerjee",
+    "email": "nehabanerjee@gmail.com",
+    "mobile": "9876543229",
+    "password": "Nehabanerjee@123",
+    "confirmPassword": "Nehabanerjee@123",
+    "photo": "/public/img/users/nehabanerjee.png"
+  },
+  {
+    "name": "Prakash Gupta",
+    "email": "prakashgupta@gmail.com",
+    "mobile": "9876543230",
+    "password": "Prakashgupta@123",
+    "confirmPassword": "Prakashgupta@123",
+    "photo": "/public/img/users/prakashgupta.png"
+  },
+  {
+    "name": "Swati Mishra",
+    "email": "swatimishra@gmail.com",
+    "mobile": "9876543231",
+    "password": "Swatimishra@123",
+    "confirmPassword": "Swatimishra@123",
+    "photo": "/public/img/users/swatimishra.png"
+  },
+  {
+    "name": "Anil Chavan",
+    "email": "anilchavan@gmail.com",
+    "mobile": "9876543232",
+    "password": "Anilchavan@123",
+    "confirmPassword": "Anilchavan@123",
+    "photo": "/public/img/users/anilchavan.png"
+  },
+  {
+    "name": "Divya Srinivasan",
+    "email": "divyasrinivasan@gmail.com",
+    "mobile": "9876543233",
+    "password": "Divyasrinivasan@123",
+    "confirmPassword": "Divyasrinivasan@123",
+    "photo": "/public/img/users/divyasrinivasan.png"
+  },
+  {
+    "name": "Rahul Meena",
+    "email": "rahulmeena@gmail.com",
+    "mobile": "9876543234",
+    "password": "Rahulmeena@123",
+    "confirmPassword": "Rahulmeena@123",
+    "photo": "/public/img/users/rahulmeena.png"
+  },
+  {
+    "name": "Sarika Pawar",
+    "email": "sarikapawar@gmail.com",
+    "mobile": "9876543235",
+    "password": "SarikaPawar@123",
+    "confirmPassword": "SarikaPawar@123",
+    "photo": "/public/img/users/sarikapawar.png"
+  },
+  {
+    "name": "Vikram Adiga",
+    "email": "vikramadiga@gmail.com",
+    "mobile": "9876543236",
+    "password": "Vikramadiga@123",
+    "confirmPassword": "Vikramadiga@123",
+    "photo": "/public/img/users/vikramadiga.png"
+  },
+  {
+    "name": "Ananya Trivedi",
+    "email": "ananyatrivedi@gmail.com",
+    "mobile": "9876543237",
+    "password": "Ananyatrivedi@123",
+    "confirmPassword": "Ananyatrivedi@123",
+    "photo": "/public/img/users/ananyatrivedi.png"
+  },
+  {
+    "name": "Naveen Bhatia",
+    "email": "naveenbhatia@gmail.com",
+    "mobile": "9876543238",
+    "password": "Naveenbhatia@123",
+    "confirmPassword": "Naveenbhatia@123",
+    "photo": "/public/img/users/naveenbhatia.png"
+  },
+  {
+    "name": "Jyoti Solanki",
+    "email": "jyotisolanki@gmail.com",
+    "mobile": "9876543239",
+    "password": "JyotiSolanki@123",
+    "confirmPassword": "JyotiSolanki@123",
+    "photo": "/public/img/users/jyotisolanki.png"
+  },
+  {
+    "name": "Dinesh Khanna",
+    "email": "dineshkhanna@gmail.com",
+    "mobile": "9876543240",
+    "password": "Dineshkhanna@123",
+    "confirmPassword": "Dineshkhanna@123",
+    "photo": "/public/img/users/dineshkhanna.png"
+  },
+  {
+    "name": "Shweta Rana",
+    "email": "shwetarana@gmail.com",
+    "mobile": "9876543241",
+    "password": "ShwetaRana@123",
+    "confirmPassword": "ShwetaRana@123",
+    "photo": "/public/img/users/shwetarana.png"
+  },
+  {
+    "name": "Kiran Bedi",
+    "email": "kiranbedi@gmail.com",
+    "mobile": "9876543242",
+    "password": "KiranBedi@123",
+    "confirmPassword": "KiranBedi@123",
+    "photo": "/public/img/users/kiranbedi.png"
+  },
+  {
+    "name": "Rohit Saxena",
+    "email": "rohitsaxena@gmail.com",
+    "mobile": "9876543243",
+    "password": "Rohitsaxena@123",
+    "confirmPassword": "Rohitsaxena@123",
+    "photo": "/public/img/users/rohitsaxena.png"
+  },
+  {
+    "name": "Preeti Verma",
+    "email": "preetiverma@gmail.com",
+    "mobile": "9876543244",
+    "password": "PreetiVerma@123",
+    "confirmPassword": "PreetiVerma@123",
+    "photo": "/public/img/users/preetiverma.png"
+  },
+
+  {
+    "name": "Aarav Sharma",
+    "email": "aaravsharma@gmail.com",
+    "mobile": "9876543245",
+    "password": "AaravSharma@123",
+    "confirmPassword": "AaravSharma@123",
+    "photo": "/public/img/users/aaravsharma.png"
+  },
+  {
+    "name": "Isha Patel",
+    "email": "ishapatel@gmail.com",
+    "mobile": "9876543246",
+    "password": "IshaPatel@123",
+    "confirmPassword": "IshaPatel@123",
+    "photo": "/public/img/users/ishapatel.png"
+  },
+  {
+    "name": "Vihaan Malhotra",
+    "email": "vihaanmalhotra@gmail.com",
+    "mobile": "9876543247",
+    "password": "VihaanMalhotra@123",
+    "confirmPassword": "VihaanMalhotra@123",
+    "photo": "/public/img/users/vihaanmalhotra.png"
+  },
+  {
+    "name": "Anaya Reddy",
+    "email": "anayareddy@gmail.com",
+    "mobile": "9876543248",
+    "password": "AnayaReddy@123",
+    "confirmPassword": "AnayaReddy@123",
+    "photo": "/public/img/users/anayareddy.png"
+  },
+  {
+    "name": "Aditya Kapoor",
+    "email": "adityakapoor@gmail.com",
+    "mobile": "7432109876",
+    "password": "AdityaKapoor@123",
+    "confirmPassword": "AdityaKapoor@123",
+    "photo": "/public/img/users/adityakapoor.png"
+  },
+  {
+    "name": "Myra Joshi",
+    "email": "myrajoshi@gmail.com",
+    "mobile": "8321098765",
+    "password": "MyraJoshi@123",
+    "confirmPassword": "MyraJoshi@123",
+    "photo": "/public/img/users/myrajoshi.png"
+  },
+  {
+    "name": "Reyansh Iyer",
+    "email": "reyanshiyer@gmail.com",
+    "mobile": "9210987654",
+    "password": "ReyanshIyer@123",
+    "confirmPassword": "ReyanshIyer@123",
+    "photo": "/public/img/users/reyanshiyer.png"
+  },
+  {
+    "name": "Kiara Nair",
+    "email": "kiaranair@gmail.com",
+    "mobile": "8100876543",
+    "password": "KiaraNair@123",
+    "confirmPassword": "KiaraNair@123",
+    "photo": "/public/img/users/kiaranair.png"
+  },
+  {
+    "name": "Arjun Mehra",
+    "email": "arjunmehra@gmail.com",
+    "mobile": "7098765432",
+    "password": "ArjunMehra@123",
+    "confirmPassword": "ArjunMehra@123",
+    "photo": "/public/img/users/arjunmehra.png"
+  },
+  {
+    "name": "Zara Khan",
+    "email": "zarakhan@gmail.com",
+    "mobile": "8987654321",
+    "password": "ZaraKhan@123",
+    "confirmPassword": "ZaraKhan@123",
+    "photo": "/public/img/users/zarakhan.png"
+  },
+  {
+    "name": "Shaurya Chawla",
+    "email": "shauryachawla@gmail.com",
+    "mobile": "7876543210",
+    "password": "ShauryaChawla@123",
+    "confirmPassword": "ShauryaChawla@123",
+    "photo": "/public/img/users/shauryachawla.png"
+  },
+  {
+    "name": "Avni Desai",
+    "email": "avnidesai@gmail.com",
+    "mobile": "6765432109",
+    "password": "AvniDesai@123",
+    "confirmPassword": "AvniDesai@123",
+    "photo": "/public/img/users/avnidesai.png"
+  },
+  {
+    "name": "Kabir Seth",
+    "email": "kabirseth@gmail.com",
+    "mobile": "5654321098",
+    "password": "KabirSeth@123",
+    "confirmPassword": "KabirSeth@123",
+    "photo": "/public/img/users/kabirseth.png"
+  },
+  {
+    "name": "Diya Agarwal",
+    "email": "diyaagarwal@gmail.com",
+    "mobile": "4543210987",
+    "password": "DiyaAgarwal@123",
+    "confirmPassword": "DiyaAgarwal@123",
+    "photo": "/public/img/users/diyaagarwal.png"
+  },
+  {
+    "name": "Rohan Bhatia",
+    "email": "rohanbhatia@gmail.com",
+    "mobile": "3432109876",
+    "password": "RohanBhatia@123",
+    "confirmPassword": "RohanBhatia@123",
+    "photo": "/public/img/users/rohanbhatia.png"
+  }
+]

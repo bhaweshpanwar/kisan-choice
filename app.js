@@ -27,7 +27,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/auth', authRouter);
 
 //Routes i need to create
-// app.use('/api/v1/products', productRouter);
+app.use('/api/v1/products', productRouter);
 // app.use('/api/v1/orders', orderRouter);
 // app.use('/api/v1/cart', cartRouter);
 // app.use('/api/v1/reviews', reviewRouter);
