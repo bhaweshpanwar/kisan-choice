@@ -8,7 +8,9 @@ const router = express.Router();
 router.use(authController.protect);
 
 // Get all products (cached)
-router.route('/').get(productController.getAllProducts);
+router
+  .route('/')
+  .get(authController.restrictTo('admin'), productController.getAllProducts);
 
 // Create a product (Only admin & farmers)
 router.post(
