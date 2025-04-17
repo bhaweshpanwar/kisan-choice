@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const AppError = require('./utils/appError');
 const userRouter = require('./routes/userRoutes');
 const authRouter = require('./routes/authRoutes');
+const productRouter = require('./routes/productRoutes');
 const passportSetup = require('./config/passport-setup');
 const globalErrorHandler = require('./controller/errorController');
 

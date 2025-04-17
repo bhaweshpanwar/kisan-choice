@@ -33,6 +33,10 @@ router.route('/:id').get(productController.getProduct);
 // Update product (Only admin & farmers)
 router.patch(
   '/:id',
+  (req, res, next) => {
+    console.log('🛡 PATCH product route middleware hit');
+    next();
+  },
   authController.restrictTo('admin', 'farmer'),
   productController.updateProduct
 );
