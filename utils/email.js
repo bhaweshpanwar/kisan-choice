@@ -3,11 +3,12 @@ const pug = require('pug');
 const { convert } = require('html-to-text');
 
 module.exports = class Email {
-  constructor(user, url) {
+  constructor(user, url = null, extraData = {}) {
     this.to = user.email;
     this.firstname = user.name.split(' ')[0];
     this.url = url;
     this.from = `Bhawesh Panwar <${process.env.EMAIL_FROM}>`;
+    this.extraData = extraData; // For passing productName, price, quantity, etc.
   }
 
   newTransport() {
@@ -39,6 +40,7 @@ module.exports = class Email {
           firstname: this.firstname,
           reset_url: this.url,
           subject,
+          ...this.extraData, // Spread extra data
         }
       );
 
@@ -51,7 +53,6 @@ module.exports = class Email {
       };
 
       await this.newTransport().sendMail(mailOptions);
-      // console.log('✅ Email sent successfully!');
     } catch (err) {
       console.error('❌ Error sending email:', err);
       throw new Error('Email sending failed!');
@@ -67,5 +68,46 @@ module.exports = class Email {
       'resetLink',
       'Password Reset Request - Kisan Choice (valid for only 10 minutes)'
     );
+  }
+
+  async sendOfferNotification() {
+    await this.send(
+      'offerNotification',
+      'You Have Received a New Offer on Your Product'
+    );
+  }
+
+  async sendOfferRejectedNotification({
+    productName,
+    farmerName,
+    rejectionReason,
+  }) {
+    await this.send('offerRejected', 'Your Offer was Rejected', {
+      name: this.name,
+      productName,
+      farmerName,
+      rejectionReason,
+    });
+  }
+
+  async sendOfferAcceptedNotification({
+    productName,
+    acceptedPrice,
+    quantity,
+    farmerName,
+    expiryDate,
+  }) {
+    const subject = `Your offer has been accepted for ${productName}`;
+
+    // Store extra data to be injected into the pug template
+    this.extraData = {
+      productName,
+      acceptedPrice,
+      quantity,
+      farmerName,
+      expiryDate,
+    };
+
+    return this.send('offerAccepted', subject);
   }
 };

@@ -1,0 +1,87 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Your Offer Has Been Reviewed
+        style(type="text/css").
+            body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+            table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+            img { -ms-interpolation-mode: bicubic; border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+            body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; background-color: #f4f4f4; font-family: Arial, sans-serif; }
+            @media screen and (max-width: 600px) {
+                .container { width: 100% !important; padding: 0 10px !important; }
+                .content { padding: 20px !important; }
+                .button-link { font-size: 16px !important; padding: 12px 20px !important; }
+            }
+
+    body(style="margin: 0 !important; padding: 0 !important; background-color: #f4f4f4;")
+        // Visually Hidden Preheader Text
+        div(style="display: none; font-size: 1px; color: #f4f4f4; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;")
+            An update on your offer for #{productName} on Kisan Choice.
+
+        table(border="0", cellpadding="0", cellspacing="0", width="100%")
+            tr
+                td(align="center", style="background-color: #f4f4f4; padding: 20px 0;")
+                    //if (gte mso 9)|(IE)
+                        table(align="center", border="0", cellspacing="0", cellpadding="0", width="600")
+                            tr
+                                td(align="center", valign="top", width="600")
+                    table.container(border="0", cellpadding="0", cellspacing="0", width="100%", style="max-width: 600px;")
+                        // LOGO SECTION
+                        tr
+                            td(align="center", style="padding: 20px 0 10px 0; background-color: #ffffff; border-top-left-radius: 8px; border-top-right-radius: 8px;")
+                                h1(style="margin: 0; font-size: 28px; color: #2E7D32; font-weight: bold;") Kisan Choice
+
+                        // MAIN CONTENT SECTION
+                        tr
+                            td.content(bgcolor="#ffffff", align="left", style="padding: 30px 30px 20px 30px; color: #333333; font-size: 16px; line-height: 1.6;")
+                                h2(style="font-size: 22px; font-weight: bold; color: #D32F2F; margin: 0 0 20px 0;")
+                                    | Regarding Your Offer for #{productName}
+
+                                p(style="margin: 0 0 15px 0;")
+                                    | Hello 
+                                    strong #{consumerName}
+                                    | ,
+
+                                p(style="margin: 0 0 15px 0;")
+                                    | Thank you for your interest and for submitting an offer for the product: 
+                                    strong #{productName}
+                                    | .
+
+                                p(style="margin: 0 0 15px 0;")
+                                    | The farmer, 
+                                    strong #{farmerName}
+                                    | , has reviewed your offer and has chosen not to accept it at this time.
+
+                                if rejectionReason
+                                    p(style="margin: 0 0 20px 0; padding: 10px; background-color: #f9f9f9; border-left: 3px solid #D32F2F;")
+                                        strong Reason from farmer:
+                                        br
+                                        | #{rejectionReason}
+
+                                p(style="margin: 0 0 25px 0;")
+                                    | We encourage you to browse other products or consider submitting a revised offer if the product allows for multiple offers.
+
+                                // BUTTON (Optional - could link to product page or offers page)
+                                table(border="0", cellspacing="0", cellpadding="0", width="100%")
+                                    tr
+                                        td(align="center")
+                                            table(border="0", cellspacing="0", cellpadding="0")
+                                                tr
+                                                    td(align="center", style="border-radius: 5px;" bgcolor="#2E7D32")
+                                                        a.button-link(href=browseProductsUrl, target="_blank", style="font-size: 18px; font-weight: bold; color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 5px; display: inline-block; border: 1px solid #2E7D32;")
+                                                            | Browse Other Products
+
+                        // FOOTER SECTION
+                        tr
+                            td(bgcolor="#f4f4f4", align="center", style="padding: 20px 30px; color: #777777; font-size: 12px; line-height: 1.4;")
+                                p(style="margin: 0 0 5px 0;")
+                                    | Thank you for using Kisan Choice!
+                                p(style="margin: 0;")
+                                    | © #{currentYear} Kisan Choice. All rights reserved.
+
+                    //if (gte mso 9)|(IE)
+                        td
+                            tr
+                        table

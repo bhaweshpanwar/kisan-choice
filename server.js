@@ -3,6 +3,8 @@ const app = require('./app');
 dotenv.config({ path: './config.env' });
 const pool = require('./db/db');
 
+const OrderScheduler = require('./utils/orderScheduler');
+const cartCleaner = require('./utils/cartCleaner');
 const port = process.env.APP_PORT || 3001;
 
 app.listen(port, async () => {
