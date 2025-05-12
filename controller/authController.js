@@ -203,9 +203,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     expirationTime
   );
 
-  const resetURL = `${req.protocol}://${req.get(
-    'host'
-  )}/api/v1/users/resetPassword/${resetToken}`;
+  const resetURL = `http://localhost:8080/reset-password/${resetToken}`;
 
   //Module for email
   try {
@@ -239,7 +237,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     .update(req.params.token)
     .digest('hex');
 
-  const query = `SELECT id,email,name FROM public."users" WHERE password_reset_token = $1 AND password_reset_expires > NOW() AND active = true`;
+  const query = `SELECT id,email,name,role FROM public."users" WHERE password_reset_token = $1 AND password_reset_expires > NOW() AND active = true`;
   const result = await pool.query(query, [resetToken]);
 
   if (result.rowCount === 0) {
@@ -331,4 +329,37 @@ exports.restrictTo = (...roles) => {
 
     next();
   };
+};
+
+exports.getMe = async (req, res, next) => {
+  try {
+    const token = req.cookies.V3wD5zX9pA6nQ4;
+    if (!token) {
+      return res.status(401).json({
+        status: 'fail',
+        message: 'Not authenticated. Please log in.',
+      });
+    }
+
+    // verify token (adjust secret as per your .env or config)
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+    // optional: check if user still exists
+    const currentUser = await User.findUserById(decoded.id);
+    if (!currentUser) {
+      return res.status(401).json({
+        status: 'fail',
+        message: 'The user belonging to this token does no longer exist.',
+      });
+    }
+
+    // attach user ID to req.params for next middleware
+    req.params.id = decoded.id;
+    next();
+  } catch (err) {
+    return res.status(403).json({
+      status: 'fail',
+      message: 'Invalid or expired token.',
+    });
+  }
 };

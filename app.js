@@ -1,6 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const userRouter = require('./routes/userRoutes');
@@ -11,17 +12,34 @@ const cartRouter = require('./routes/cartRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const negotiationRouter = require('./routes/negotiationRoutes');
 const blockRouter = require('./routes/blockRoutes');
-
+const checkoutController = require('./controller/checkoutController');
 const passportSetup = require('./config/passport-setup');
 const globalErrorHandler = require('./controller/errorController');
 
 const app = express();
 
+// --- MIDDLEWARES ---
+const corsOptions = {
+  origin: ['http://localhost:8080', 'http://localhost:5173'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+};
+app.use(cors(corsOptions));
+
 app.use(morgan('dev'));
+
+// Option 1: Define webhook route very early
+app.post(
+  '/api/v1/cart/webhook',
+  express.raw({ type: 'application/json' }),
+  checkoutController.handleWebhook
+);
 
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
+app.use('/public', express.static('public'));
 
 // // Test middleware
 // app.use((req, res, next) => {

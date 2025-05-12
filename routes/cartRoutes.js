@@ -21,10 +21,10 @@ router.post('/checkout', cartController.checkout);
 
 router.post('/checkout-session', checkoutController.getCheckoutSession);
 
-router.post(
-  '/webhook',
-  express.raw({ type: 'application/json' }),
-  checkoutController.handleWebhook
-);
+// router.post(
+//   '/webhook',
+//   express.raw({ type: 'application/json' }),
+//   checkoutController.handleWebhook
+// );
 
 module.exports = router;

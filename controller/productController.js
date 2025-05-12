@@ -146,46 +146,165 @@ exports.searchProduct = catchAsync(async (req, res, next) => {
   });
 });
 
+// exports.getProductsByCategory = catchAsync(async (req, res, next) => {
+//   const { category } = req.params;
+//   const page = parseInt(req.query.page) || 1;
+//   const limit = parseInt(req.query.limit) || 10;
+
+//   const offset = (page - 1) * limit;
+
+//   // const categoryQuery = `
+//   //   SELECT
+//   //     p.*,
+//   //     c.name AS category_name,
+//   //     u.name AS seller_name,
+//   //     u.photo AS seller_photo
+//   //   FROM products p
+//   //   LEFT JOIN categories c ON p.category_id = c.id
+//   //   LEFT JOIN farmers f ON p.seller_id = f.id
+//   //   LEFT JOIN users u ON f.id = u.id
+//   //   WHERE c.name ILIKE $1
+//   //   ORDER BY p.name
+//   //   LIMIT $2 OFFSET $3;
+//   // `;
+
+//   const categoryQuery = `
+//   SELECT
+//   p.*,
+//   c.name AS category_name,
+//   u.name AS seller_name,
+//   u.photo AS seller_photo,
+//   ROUND(AVG(r.rating)::numeric, 1) AS ratings_average,
+//   COUNT(r.id) AS reviews_count
+//   FROM products p
+//   LEFT JOIN categories c ON p.category_id = c.id
+//   LEFT JOIN farmers f ON p.seller_id = f.id
+//   LEFT JOIN users u ON f.id = u.id
+//   LEFT JOIN reviews r ON p.id = r.product_id
+//   WHERE c.name ILIKE $1
+//   GROUP BY p.id, c.name, u.name, u.photo
+//   ORDER BY p.name
+//   LIMIT $2 OFFSET $3;
+//   `;
+
+//   const values = [`%${category}%`, limit, offset];
+
+//   const countQuery = `SELECT COUNT(*) FROM products p
+//     LEFT JOIN categories c ON p.category_id = c.id
+//     WHERE c.name ILIKE $1`;
+
+//   const countResult = await pool.query(countQuery, [`%${category}%`]);
+//   const total = parseInt(countResult.rows[0].count);
+
+//   const { rows } = await pool.query(categoryQuery, values);
+
+//   if (rows.length === 0) {
+//     return res.status(404).json({
+//       status: 'fail',
+//       message: `No products found in category '${category}'`,
+//     });
+//   }
+
+//   res.status(200).json({
+//     status: 'success',
+//     results: rows.length,
+//     total,
+//     currentPage: page,
+//     totalPages: Math.ceil(total / limit),
+//     data: {
+//       products: rows,
+//     },
+//   });
+// });
+
 exports.getProductsByCategory = catchAsync(async (req, res, next) => {
   const { category } = req.params;
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 10;
+  // const cacheKey = `category:${category}:${JSON.stringify(req.query)}`;
 
-  const offset = (page - 1) * limit;
+  // Check if the result is cached
+  // const cachedResult = await client.get(cacheKey);
+  // if (cachedResult) {
+  //   console.log('Serving from cache');
+  //   return res.status(200).json({
+  //     status: 'success',
+  //     data: JSON.parse(cachedResult),
+  //   });
+  // }
+  req.query.limit = Number(req.query.limit, 10) || 12;
+  req.query.page = Number(req.query.page, 10) || 1;
+  console.log(
+    'Before limit and page',
+    typeof req.query.limit,
+    typeof req.query.page
+  );
 
-  const categoryQuery = `
-    SELECT 
-      p.*, 
-      c.name AS category_name, 
-      u.name AS seller_name
-    FROM products p
-    LEFT JOIN categories c ON p.category_id = c.id
-    LEFT JOIN farmers f ON p.seller_id = f.id
-    LEFT JOIN users u ON f.id = u.id
-    WHERE c.name ILIKE $1
-    ORDER BY p.name
-    LIMIT $2 OFFSET $3;
+  const baseQuerySQL = `
+ SELECT
+  p.*,
+  c.name AS category_name,
+  u.name AS seller_name,
+  u.photo AS seller_photo,
+  ROUND(AVG(r.rating)::numeric, 1) AS ratings_average,
+  COUNT(r.id) AS reviews_count
+  FROM products p
+  LEFT JOIN categories c ON p.category_id = c.id
+  LEFT JOIN farmers f ON p.seller_id = f.id
+  LEFT JOIN users u ON f.id = u.id
+  LEFT JOIN reviews r ON p.id = r.product_id
+  WHERE c.name ILIKE $1
   `;
 
-  const values = [`%${category}%`, limit, offset];
+  const features = new APIFeatures(baseQuerySQL, req.query)
+    .filter()
+    .groupBy(['name', 'price', 'verified', 'negotiate'])
+    .sort()
+    .paginate();
 
-  const countQuery = `SELECT COUNT(*) FROM products p
-    LEFT JOIN categories c ON p.category_id = c.id
-    WHERE c.name ILIKE $1`;
+  const finalQuery = features.query;
+  const queryValues = [`%${category}%`, ...features.queryParams];
 
-  const countResult = await pool.query(countQuery, [`%${category}%`]);
-  const total = parseInt(countResult.rows[0].count);
+  console.log('Final Query:', finalQuery);
+  console.log('Query Values:', queryValues);
+  console.log(
+    'Query Values Types:',
+    features.queryParams.map((v) => `${v}:${typeof v}`)
+  );
 
-  const { rows } = await pool.query(categoryQuery, values);
+  const { rows } = await pool.query(finalQuery, queryValues);
 
-  if (rows.length === 0) {
-    return res.status(404).json({
-      status: 'fail',
-      message: `No products found in category '${category}'`,
-    });
+  let countQuerySQL = `
+    SELECT COUNT(DISTINCT p.id) FROM products p
+    JOIN categories c ON p.category_id = c.id
+    WHERE c.name ILIKE $1
+  `;
+
+  const filterConditionsForCount = [];
+  const filterParamsForCount = [];
+  let countParamIndex = 1;
+
+  if (req.query.verified === 'true')
+    filterConditionsForCount.push(`p."verified" = true`);
+  if (req.query.negotiable === 'true')
+    filterConditionsForCount.push(`p.negotiable = true`);
+
+  if (req.query.rating) {
+    countParamIndex++;
+    filterConditionsForCount.push(`p.ratings_average >= $${countParamIndex}`);
+    filterParamsForCount.push(parseFloat(req.query.rating));
   }
 
-  res.status(200).json({
+  if (filterConditionsForCount.length > 0) {
+    countQuerySQL += ` AND ${filterConditionsForCount.join(' AND ')}`;
+  }
+
+  const countValues = [`%${category}%`, ...filterParamsForCount];
+  const countResult = await pool.query(countQuerySQL, countValues);
+
+  const total = parseInt(countResult.rows[0].count, 10);
+  const limit = parseInt(req.query.limit) || 10;
+  const page = parseInt(req.query.page) || 1;
+
+  const response = {
     status: 'success',
     results: rows.length,
     total,
@@ -194,7 +313,12 @@ exports.getProductsByCategory = catchAsync(async (req, res, next) => {
     data: {
       products: rows,
     },
-  });
+  };
+
+  // Cache the result
+  // client.setex(cacheKey, 3600, JSON.stringify(response));
+
+  res.status(200).json(response);
 });
 
 exports.getProduct = catchAsync(async (req, res, next) => {
@@ -205,6 +329,7 @@ exports.getProduct = catchAsync(async (req, res, next) => {
     p.*, 
     c.name AS category_name, 
     u.name AS seller_name,
+    u.photo AS seller_photo,
     COALESCE(
       json_agg(
         jsonb_build_object(
@@ -213,7 +338,8 @@ exports.getProduct = catchAsync(async (req, res, next) => {
           'comment', r.comments,
           'user_id', r.consumer_id,
           'created_at', r.created_at,
-          'user_name', ru.name
+          'user_name', ru.name,
+          'user_image', ru.photo
         )
         ORDER BY r.created_at DESC
       ) FILTER (WHERE r.id IS NOT NULL), '[]'
@@ -231,8 +357,8 @@ exports.getProduct = catchAsync(async (req, res, next) => {
   ) r ON true
   LEFT JOIN users ru ON ru.id = r.consumer_id
   WHERE p.id = $1
-  GROUP BY p.id, c.name, u.name
-  `;
+  GROUP BY p.id, c.name, u.name, u.photo
+`;
 
   const { rows } = await pool.query(productQuery, [id]);
 

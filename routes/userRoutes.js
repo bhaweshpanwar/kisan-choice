@@ -17,7 +17,7 @@ router.use(authController.protect);
 router.patch('/become-farmer', userController.becomeFarmer);
 
 router.patch('/updatePassword', authController.updatePassword);
-// router.get('/me', userController.getMe, userController.getUser);
+router.get('/me', authController.getMe, userController.getUser);
 // router.patch(
 //   '/updateMe',
 //   userController.uploadUserPhoto,
@@ -38,5 +38,18 @@ router.patch('/updatePassword', authController.updatePassword);
 //   .get(userController.getUser)
 //   .patch(userController.updateUser)
 //   .delete(userController.deleteUser);
+
+// At the bottom of the file before module.exports
+
+// Address Routes
+router
+  .route('/me/addresses')
+  .get(userController.getMyAddresses)
+  .post(userController.createAddress);
+
+router
+  .route('/me/addresses/:addressId')
+  .put(userController.updateAddress)
+  .delete(userController.deleteAddress);
 
 module.exports = router;

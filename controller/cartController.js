@@ -921,40 +921,189 @@ exports.clearCart = catchAsync(async (req, res, next) => {
 //   }
 // });
 
+// exports.checkout = catchAsync(async (req, res, next) => {
+//   const client = await pool.connect();
+//   try {
+//     await client.query('BEGIN');
+
+//     const userId = req.user.id;
+//     const { delivery_address, payment_method_id } = req.body; // Assuming payment_method_id for Stripe
+
+//     if (!delivery_address) {
+//       await client.query('ROLLBACK');
+//       return next(new AppError('Delivery address is required.', 400));
+//     }
+//     // Add validation for payment_method_id if needed
+
+//     const cartRes = await client.query(
+//       'SELECT id FROM carts WHERE consumer_id = $1',
+//       [userId]
+//     );
+//     if (cartRes.rowCount === 0) {
+//       await client.query('ROLLBACK');
+//       return next(new AppError('Cart not found.', 404));
+//     }
+//     const cartId = cartRes.rows[0].id;
+
+//     // Fetch cart items with correct pricing for order creation and validation
+//     const cartItemsQuery = `
+//       SELECT
+//         ci.id AS cart_item_id,
+//         ci.product_id,
+//         p.name AS product_name,
+//         ci.quantity,
+//         ci.is_negotiated,
+//         ci.negotiated_price_per_unit,
+//         p.price AS original_product_price,
+//         p.stock_quantity
+//       FROM cart_items ci
+//       JOIN products p ON ci.product_id = p.id
+//       WHERE ci.cart_id = $1;
+//     `;
+//     const { rows: cartItemsForOrder } = await client.query(cartItemsQuery, [
+//       cartId,
+//     ]);
+
+//     if (cartItemsForOrder.length === 0) {
+//       await client.query('ROLLBACK');
+//       return next(new AppError('Your cart is empty.', 400));
+//     }
+
+//     let orderTotalAmount = 0;
+//     const orderItemsDetails = [];
+
+//     for (const item of cartItemsForOrder) {
+//       if (item.quantity > item.stock_quantity) {
+//         await client.query('ROLLBACK');
+//         return next(
+//           new AppError(
+//             `Insufficient stock for product "${item.product_name}". Only ${item.stock_quantity} available.`,
+//             400
+//           )
+//         );
+//       }
+//       const effectivePrice =
+//         item.is_negotiated && item.negotiated_price_per_unit
+//           ? parseFloat(item.negotiated_price_per_unit)
+//           : parseFloat(item.original_product_price);
+//       const itemTotal = item.quantity * effectivePrice;
+//       orderTotalAmount += itemTotal;
+
+//       orderItemsDetails.push({
+//         product_id: item.product_id,
+//         quantity: item.quantity,
+//         price_per_unit_paid: effectivePrice, // Price actually paid
+//         total_price: itemTotal,
+//       });
+//     }
+
+//     // Create Order (status 'pending_payment' or similar)
+//     const orderId = uuidv4();
+//     const orderQuery = `
+//       INSERT INTO orders (id, consumer_id, delivery_address, total_amount, status)
+//       VALUES ($1, $2, $3, $4, 'pending_payment') RETURNING id, created_at;
+//     `;
+//     const orderResult = await client.query(orderQuery, [
+//       orderId,
+//       userId,
+//       delivery_address,
+//       orderTotalAmount,
+//     ]);
+
+//     // Create Order Items
+//     // I'll need an order_items table:
+//     // CREATE TABLE order_items (
+//     //   id UUID PRIMARY KEY,
+//     //   order_id UUID REFERENCES orders(id) ON DELETE CASCADE,
+//     //   product_id UUID REFERENCES products(id),
+//     //   quantity INT,
+//     //   price_per_unit_paid DECIMAL(10,2), -- The price at which it was sold
+//     //   total_price DECIMAL(10,2)
+//     // );
+//     for (const detail of orderItemsDetails) {
+//       const orderItemId = uuidv4();
+//       await client.query(
+//         `INSERT INTO order_items (id, order_id, product_id, quantity, price_per_unit_paid, total_price)
+//          VALUES ($1, $2, $3, $4, $5, $6)`,
+//         [
+//           orderItemId,
+//           orderId,
+//           detail.product_id,
+//           detail.quantity,
+//           detail.price_per_unit_paid,
+//           detail.total_price,
+//         ]
+//       );
+//     }
+
+//     // The cart is NOT cleared here. It's cleared by Stripe webhook after successful payment.
+//     // Your flow:
+//     // 1. POST /api/v1/cart/checkout -> creates pending order (this function)
+//     // 2. Frontend receives order_id, calls POST /api/v1/orders/checkout-session with order_id
+//     // 3. Stripe processes payment
+//     // 4. POST /api/v1/orders/webhook -> updates order to 'paid', clears cart.
+
+//     await client.query('COMMIT');
+//     res.status(200).json({
+//       status: 'success',
+//       message: 'Order initiated, proceed to payment.',
+//       data: {
+//         order_id: orderResult.rows[0].id,
+//         order_created_at: orderResult.rows[0].created_at,
+//         total_amount: orderTotalAmount,
+//         delivery_address,
+//         items: orderItemsDetails, // Send back the processed items for confirmation/Stripe session
+//       },
+//     });
+//   } catch (error) {
+//     await client.query('ROLLBACK');
+//     next(error);
+//   } finally {
+//     client.release();
+//   }
+// });
+
 exports.checkout = catchAsync(async (req, res, next) => {
   const client = await pool.connect();
   try {
     await client.query('BEGIN');
 
-    const userId = req.user.id;
-    const { delivery_address, payment_method_id } = req.body; // Assuming payment_method_id for Stripe
+    const userId = req.user.id; // consumer_id
+    const { address_id } = req.body;
 
-    if (!delivery_address) {
+    if (!address_id) {
       await client.query('ROLLBACK');
-      return next(new AppError('Delivery address is required.', 400));
+      return next(new AppError('Delivery address ID is required.', 400));
     }
-    // Add validation for payment_method_id if needed
+
+    const addressCheck = await client.query(
+      'SELECT id FROM addresses WHERE id = $1 AND user_id = $2',
+      [address_id, userId]
+    );
+    if (addressCheck.rowCount === 0) {
+      await client.query('ROLLBACK');
+      return next(new AppError('Invalid address selected.', 400));
+    }
 
     const cartRes = await client.query(
-      'SELECT id FROM carts WHERE consumer_id = $1',
+      'SELECT id FROM cart WHERE consumer_id = $1',
       [userId]
     );
     if (cartRes.rowCount === 0) {
       await client.query('ROLLBACK');
-      return next(new AppError('Cart not found.', 404));
+      return next(new AppError('Cart not found for user.', 404));
     }
     const cartId = cartRes.rows[0].id;
 
-    // Fetch cart items with correct pricing for order creation and validation
     const cartItemsQuery = `
       SELECT
-        ci.id AS cart_item_id,
         ci.product_id,
         p.name AS product_name,
+        p.description AS product_description,
+        p.seller_id AS product_seller_id,
         ci.quantity,
         ci.is_negotiated,
-        ci.negotiated_price_per_unit,
-        p.price AS original_product_price,
+        ci.price_per_unit,
         p.stock_quantity
       FROM cart_items ci
       JOIN products p ON ci.product_id = p.id
@@ -970,93 +1119,103 @@ exports.checkout = catchAsync(async (req, res, next) => {
     }
 
     let orderTotalAmount = 0;
-    const orderItemsDetails = [];
+    const orderItemsForDb = [];
+    const itemsForStripe = [];
 
     for (const item of cartItemsForOrder) {
       if (item.quantity > item.stock_quantity) {
         await client.query('ROLLBACK');
         return next(
           new AppError(
-            `Insufficient stock for product "${item.product_name}". Only ${item.stock_quantity} available.`,
+            `Insufficient stock for ${item.product_name}. Only ${item.stock_quantity} available.`,
             400
           )
         );
       }
-      const effectivePrice =
-        item.is_negotiated && item.negotiated_price_per_unit
-          ? parseFloat(item.negotiated_price_per_unit)
-          : parseFloat(item.original_product_price);
+      if (!item.product_seller_id) {
+        await client.query('ROLLBACK');
+        return next(
+          new AppError(
+            `Product ${item.product_name} is missing seller information. Cannot proceed.`,
+            500
+          )
+        );
+      }
+
+      const effectivePrice = parseFloat(item.price_per_unit);
       const itemTotal = item.quantity * effectivePrice;
       orderTotalAmount += itemTotal;
 
-      orderItemsDetails.push({
+      orderItemsForDb.push({
         product_id: item.product_id,
+        seller_id: item.product_seller_id,
         quantity: item.quantity,
-        price_per_unit_paid: effectivePrice, // Price actually paid
+        price_per_unit_paid: effectivePrice,
         total_price: itemTotal,
+      });
+
+      itemsForStripe.push({
+        price_data: {
+          currency: 'usd',
+          unit_amount: Math.round(effectivePrice * 100),
+          product_data: {
+            name: item.product_name,
+            description: item.product_description || 'N/A',
+            images:
+              item.product_images && item.product_images.length > 0
+                ? [item.product_images[0]]
+                : undefined,
+          },
+        },
+        quantity: item.quantity,
       });
     }
 
-    // Create Order (status 'pending_payment' or similar)
-    const orderId = uuidv4();
+    // Insert into orders table (Postgres will generate the UUID)
     const orderQuery = `
-      INSERT INTO orders (id, consumer_id, delivery_address, total_amount, status)
-      VALUES ($1, $2, $3, $4, 'pending_payment') RETURNING id, created_at;
+      INSERT INTO orders (
+        consumer_id,
+        total_price,
+        payment_status,
+        order_status
+      )
+      VALUES ($1, $2, 'pending', 'pending')
+      RETURNING id, created_at;
     `;
     const orderResult = await client.query(orderQuery, [
-      orderId,
       userId,
-      delivery_address,
       orderTotalAmount,
     ]);
+    const orderId = orderResult.rows[0].id;
 
-    // Create Order Items
-    // I'll need an order_items table:
-    // CREATE TABLE order_items (
-    //   id UUID PRIMARY KEY,
-    //   order_id UUID REFERENCES orders(id) ON DELETE CASCADE,
-    //   product_id UUID REFERENCES products(id),
-    //   quantity INT,
-    //   price_per_unit_paid DECIMAL(10,2), -- The price at which it was sold
-    //   total_price DECIMAL(10,2)
-    // );
-    for (const detail of orderItemsDetails) {
-      const orderItemId = uuidv4();
+    // Insert into order_items
+    for (const detail of orderItemsForDb) {
       await client.query(
-        `INSERT INTO order_items (id, order_id, product_id, quantity, price_per_unit_paid, total_price)
-         VALUES ($1, $2, $3, $4, $5, $6)`,
+        `INSERT INTO order_items (order_id, product_id, seller_id, quantity, price)
+         VALUES ($1, $2, $3, $4, $5)`,
         [
-          orderItemId,
           orderId,
           detail.product_id,
+          detail.seller_id,
           detail.quantity,
           detail.price_per_unit_paid,
-          detail.total_price,
         ]
       );
     }
-
-    // The cart is NOT cleared here. It's cleared by Stripe webhook after successful payment.
-    // Your flow:
-    // 1. POST /api/v1/cart/checkout -> creates pending order (this function)
-    // 2. Frontend receives order_id, calls POST /api/v1/orders/checkout-session with order_id
-    // 3. Stripe processes payment
-    // 4. POST /api/v1/orders/webhook -> updates order to 'paid', clears cart.
 
     await client.query('COMMIT');
     res.status(200).json({
       status: 'success',
       message: 'Order initiated, proceed to payment.',
       data: {
-        order_id: orderResult.rows[0].id,
-        order_created_at: orderResult.rows[0].created_at,
+        order_id: orderId,
+        items_for_stripe: itemsForStripe,
         total_amount: orderTotalAmount,
-        delivery_address,
-        items: orderItemsDetails, // Send back the processed items for confirmation/Stripe session
       },
     });
   } catch (error) {
     await client.query('ROLLBACK');
+    console.error('Error in /cart/checkout during order creation:', error);
     next(error);
   } finally {
     client.release();
