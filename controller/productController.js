@@ -3,7 +3,7 @@ const pool = require('./../db/db');
 const client = require('./../db/redis');
 const catchAsync = require('../utils/catchAsync');
 const APIFeatures = require('../utils/apiFeatures');
-
+const AppError = require('../utils/appError');
 exports.getAllProducts = catchAsync(async (req, res, next) => {
   const cacheKey = `products:${JSON.stringify(req.query)}`;
 
@@ -44,19 +44,31 @@ exports.createProduct = catchAsync(async (req, res, next) => {
     name,
     price,
     stock_quantity,
-    category, // UUID
+    category_id, // UUID
     negotiate,
     description,
     key_highlights,
     min_qty,
     max_qty,
   } = req.body;
+  console.log(`Are we getting all the things we need?`, {
+    name,
+    price,
+    stock_quantity,
+    category_id,
+    negotiate,
+    description,
+    key_highlights,
+    min_qty,
+    max_qty,
+  });
+  const seller_id = req.user.id; // Assuming the seller_id is the ID of the logged-in user
 
   if (
     !name ||
     !price ||
     !stock_quantity ||
-    !category ||
+    !category_id ||
     !description ||
     !min_qty ||
     !max_qty
@@ -68,21 +80,22 @@ exports.createProduct = catchAsync(async (req, res, next) => {
 
   const productQuery = `
     INSERT INTO products
-      (name, price, stock_quantity, category_id, negotiate, description, key_highlights, min_qty, max_qty, verified)
+      (name, price, stock_quantity, category_id, negotiate, description, key_highlights, min_qty, max_qty, verified, seller_id)
     VALUES
-      ($1, $2, $3, $4, $5, $6, $7, $8, $9, false)
+      ($1, $2, $3, $4, $5, $6, $7, $8, $9, false, $10)
     RETURNING *`;
 
   const values = [
     name,
     price,
     stock_quantity,
-    category,
+    category_id,
     negotiate || false,
     description,
     key_highlights || [],
     min_qty,
     max_qty,
+    seller_id,
   ];
 
   const { rows } = await pool.query(productQuery, values);
@@ -437,5 +450,55 @@ exports.deleteProduct = catchAsync(async (req, res, next) => {
   res.status(204).json({
     status: 'success',
     data: null,
+  });
+});
+
+exports.getMyFarmerProducts = catchAsync(async (req, res, next) => {
+  const farmerId = req.user.id; // The logged-in farmer's ID
+
+  const query = `
+    SELECT
+      id,
+      name,
+      price,
+      stock_quantity,
+      negotiate,
+      description,
+      key_highlights,
+      min_qty,
+      max_qty,
+      created_at,
+      verified,
+      ratings_average,
+      category_id
+    FROM products
+    WHERE seller_id = $1
+    ORDER BY created_at DESC;
+  `;
+  // Ensure 'seller_id' in your 'products' table correctly references the farmer's user ID or a specific farmer ID.
+  // Based on your schema: products.seller_id REFERENCES farmers(id)
+  // And farmers.id REFERENCES users(id). So req.user.id should match farmers.id for the logged-in farmer.
+
+  const { rows: products } = await pool.query(query, [farmerId]);
+
+  res.status(200).json({
+    status: 'success',
+    results: products.length,
+    data: {
+      products,
+    },
+  });
+});
+
+exports.getCategories = catchAsync(async (req, res, next) => {
+  const query = 'SELECT * FROM categories ORDER BY name';
+  const { rows: categories } = await pool.query(query);
+
+  res.status(200).json({
+    status: 'success',
+    results: categories.length,
+    data: {
+      categories,
+    },
   });
 });

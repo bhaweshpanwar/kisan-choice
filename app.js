@@ -2,7 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-
+const helmet = require('helmet');
 const AppError = require('./utils/appError');
 const userRouter = require('./routes/userRoutes');
 const authRouter = require('./routes/authRoutes');
@@ -15,12 +15,18 @@ const blockRouter = require('./routes/blockRoutes');
 const checkoutController = require('./controller/checkoutController');
 const passportSetup = require('./config/passport-setup');
 const globalErrorHandler = require('./controller/errorController');
-
+const productController = require('./controller/productController');
 const app = express();
+
+// Set security HTTP headers
+app.use(helmet());
 
 // --- MIDDLEWARES ---
 const corsOptions = {
-  origin: ['http://localhost:8080', 'http://localhost:5173'],
+  origin: [
+    'http://localhost:8080',
+    'https://heroic-dragon-0b1a27.netlify.app/login',
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
@@ -35,6 +41,8 @@ app.post(
   express.raw({ type: 'application/json' }),
   checkoutController.handleWebhook
 );
+
+app.get('/api/v1/categories', productController.getCategories);
 
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));

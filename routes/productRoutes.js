@@ -7,6 +7,13 @@ const router = express.Router();
 // Authentication required for viewing products
 router.use(authController.protect);
 
+// --- New Route for Farmer to get THEIR products ---
+router.get(
+  '/my-products',
+  authController.restrictTo('farmer'),
+  productController.getMyFarmerProducts
+);
+
 // Get all products (cached)
 router
   .route('/')
