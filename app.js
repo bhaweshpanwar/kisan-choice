@@ -3,6 +3,12 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
+const hpp = require('hpp');
+const winston = require('winston');
+//
 const AppError = require('./utils/appError');
 const userRouter = require('./routes/userRoutes');
 const authRouter = require('./routes/authRoutes');
@@ -20,6 +26,37 @@ const app = express();
 
 // Set security HTTP headers
 app.use(helmet());
+
+// Limit requests
+const limiter = rateLimit({
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP, please try again in an hour!',
+});
+app.use('/api', limiter);
+
+app.use(mongoSanitize());
+
+app.use(xss());
+
+app.use(hpp());
+
+const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.json(),
+  transports: [
+    new winston.transports.File({ filename: 'error.log', level: 'error' }),
+    new winston.transports.File({ filename: 'combined.log' }),
+  ],
+});
+
+if (process.env.NODE_ENV !== 'production') {
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.simple(),
+    })
+  );
+}
 
 // --- MIDDLEWARES ---
 const corsOptions = {

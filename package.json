@@ -17,7 +17,10 @@
     "crypto": "^1.0.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^7.5.0",
     "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
     "html-to-text": "^9.0.5",
     "ioredis": "^5.6.1",
     "joi": "^17.13.3",
@@ -32,7 +35,9 @@
     "pg-pool": "^3.7.1",
     "pug": "^3.0.3",
     "redis": "^4.7.0",
-    "stripe": "^18.0.0"
+    "stripe": "^18.0.0",
+    "winston": "^3.17.0",
+    "xss-clean": "^0.1.4"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
