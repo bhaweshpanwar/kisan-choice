@@ -797,7 +797,7 @@ exports.clearCart = catchAsync(async (req, res, next) => {
     const userId = req.user.id;
 
     const cartRes = await client.query(
-      'SELECT id FROM carts WHERE consumer_id = $1',
+      'SELECT id FROM cart WHERE consumer_id = $1',
       [userId]
     );
     if (cartRes.rowCount === 0) {
