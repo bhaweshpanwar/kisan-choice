@@ -7,7 +7,7 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-pool.on('connect', () => {
+pool.on('connect', (client) => {
   console.log('🔐 Connected to database');
 });
 

@@ -44,11 +44,11 @@ cron.schedule('0 0 * * *', async () => {
       const offerIdsToUpdate = expiredOffersRes.rows.map((row) => row.offer_id);
       if (offerIdsToUpdate.length > 0) {
         await client.query(
-          "UPDATE offers SET status = 'lapsed' WHERE id = ANY($1::uuid[]) AND status = 'accepted'",
+          "UPDATE offers SET status = 'rejected' WHERE id = ANY($1::uuid[]) AND status = 'accepted'",
           [offerIdsToUpdate]
         );
         console.log(
-          `Updated status for ${offerIdsToUpdate.length} original offers to 'lapsed'.`
+          `Updated status for ${offerIdsToUpdate.length} original offers to 'rejected'.`
         );
       }
     }

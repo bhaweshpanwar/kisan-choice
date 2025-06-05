@@ -276,12 +276,12 @@ exports.getProductsByCategory = catchAsync(async (req, res, next) => {
   const finalQuery = features.query;
   const queryValues = [`%${category}%`, ...features.queryParams];
 
-  console.log('Final Query:', finalQuery);
-  console.log('Query Values:', queryValues);
-  console.log(
-    'Query Values Types:',
-    features.queryParams.map((v) => `${v}:${typeof v}`)
-  );
+  // console.log('Final Query:', finalQuery);
+  // console.log('Query Values:', queryValues);
+  // console.log(
+  //   'Query Values Types:',
+  //   features.queryParams.map((v) => `${v}:${typeof v}`)
+  // );
 
   const { rows } = await pool.query(finalQuery, queryValues);
 
