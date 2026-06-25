@@ -34,6 +34,8 @@ const allowedOrigins = [
   'https://heroic-dragon-0b1a27.netlify.app',
 
   'https://kisanchoice.bhaweshpanwar.xyz',
+
+  'https://kisan-choice.onrender.com',
 ];
 
 const corsOptions = {
