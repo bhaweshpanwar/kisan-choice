@@ -3,12 +3,17 @@ const dotenv = require('dotenv');
 
 dotenv.config({ path: './config.env' });
 
+const useSSL =
+  process.env.NODE_ENV === 'production' ||
+  (process.env.DATABASE_URL &&
+    /sslmode=require|neon|render|heroku|supabase/i.test(process.env.DATABASE_URL));
+
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   max: 10,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 15000, // bumped for Neon cold-start latency (free tier)
-  ssl: { rejectUnauthorized: false }, // REQUIRED for Neon
+  connectionTimeoutMillis: 15000,
+  ...(useSSL ? { ssl: { rejectUnauthorized: false } } : {}),
   allowExitOnIdle: false,
 });
 

@@ -51,6 +51,9 @@ exports.createSendToken = (user, statusCode, req, res, sendUserData = true) => {
 
   if (process.env.NODE_ENV === 'production') {
     cookieOptions.secure = true;
+    cookieOptions.sameSite = 'none';
+  } else {
+    cookieOptions.sameSite = 'lax';
   }
 
   res.cookie('V3wD5zX9pA6nQ4', token, cookieOptions);
@@ -133,10 +136,17 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.logout = (req, res) => {
-  res.cookie('V3wD5zX9pA6nQ4', 'loggedout', {
+  const cookieOptions = {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
-  });
+  };
+  if (process.env.NODE_ENV === 'production') {
+    cookieOptions.secure = true;
+    cookieOptions.sameSite = 'none';
+  } else {
+    cookieOptions.sameSite = 'lax';
+  }
+  res.cookie('V3wD5zX9pA6nQ4', 'loggedout', cookieOptions);
   res.status(200).json({
     status: 'success',
   });
