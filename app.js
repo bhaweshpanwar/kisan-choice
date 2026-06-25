@@ -16,6 +16,7 @@ const cartRouter = require('./routes/cartRoutes');
 const orderRouter = require('./routes/orderRoutes');
 const negotiationRouter = require('./routes/negotiationRoutes');
 const blockRouter = require('./routes/blockRoutes');
+const adminRouter = require('./routes/adminRoutes');
 const checkoutController = require('./controller/checkoutController');
 const passportSetup = require('./config/passport-setup');
 const globalErrorHandler = require('./controller/errorController');
@@ -91,6 +92,7 @@ app.use('/api/v1/cart', cartRouter);
 app.use('/api/v1/orders', orderRouter);
 app.use('/api/v1/negotiations', negotiationRouter);
 app.use('/api/v1/block', blockRouter);
+app.use('/api/v1/admin', adminRouter);
 
 app.get('/', (req, res) => {
   res.status(200).json({

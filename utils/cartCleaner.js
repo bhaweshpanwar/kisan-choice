@@ -1,17 +1,14 @@
-// utils/cronJobs.js (or similar)
 const cron = require('node-cron');
-const pool = require('../db/db'); // Adjust path to your db pool
+const pool = require('../db/db');
 
-// Job to remove expired accepted offers from carts (if not ordered)
-// Runs, for example, every hour: '0 * * * *'
-// Runs daily at midnight: '0 0 * * *'
-cron.schedule('0 0 * * *', async () => {
-  console.log('Running scheduled job: Expire accepted offers from carts...');
+// Job to remove expired accepted offers from carts (if not ordered).
+// Exported for external trigger (cron-job.org / GitHub Actions) on Render free tier.
+const expireAcceptedOffers = async () => {
   const client = await pool.connect();
   try {
+    console.log('Running scheduled job: Expire accepted offers from carts...');
     await client.query('BEGIN');
 
-    // Find accepted_offers that have expired
     const expiredOffersRes = await client.query(
       `SELECT ao.id as accepted_offer_id, ao.offer_id, ci.id as cart_item_id, ci.cart_id
        FROM accepted_offers ao
@@ -21,27 +18,24 @@ cron.schedule('0 0 * * *', async () => {
 
     if (expiredOffersRes.rowCount === 0) {
       console.log('No expired accepted offers found in carts.');
-      await client.query('COMMIT'); // or ROLLBACK, doesn't matter much here
-      return;
+      await client.query('COMMIT');
+      return { removed: 0 };
     }
 
     const cartItemIdsToDelete = expiredOffersRes.rows.map(
       (row) => row.cart_item_id
     );
-    const acceptedOfferIdsToExpireStatus = expiredOffersRes.rows.map(
-      (row) => row.accepted_offer_id
-    );
+    const offerIdsToUpdate = expiredOffersRes.rows.map((row) => row.offer_id);
 
     if (cartItemIdsToDelete.length > 0) {
-      const deleteCartItemsRes = await client.query(
+      await client.query(
         'DELETE FROM cart_items WHERE id = ANY($1::uuid[]) RETURNING id',
         [cartItemIdsToDelete]
       );
       console.log(
-        `Removed ${deleteCartItemsRes.rowCount} expired negotiated items from carts.`
+        `Removed ${cartItemIdsToDelete.length} expired negotiated items from carts.`
       );
 
-      const offerIdsToUpdate = expiredOffersRes.rows.map((row) => row.offer_id);
       if (offerIdsToUpdate.length > 0) {
         await client.query(
           "UPDATE offers SET status = 'rejected' WHERE id = ANY($1::uuid[]) AND status = 'accepted'",
@@ -55,15 +49,19 @@ cron.schedule('0 0 * * *', async () => {
 
     await client.query('COMMIT');
     console.log('Finished expiring accepted offers job.');
+    return { removed: cartItemIdsToDelete.length };
   } catch (error) {
     await client.query('ROLLBACK');
-    console.error(
-      'Error in scheduled job for expiring accepted offers:',
-      error
-    );
+    console.error('Error in scheduled job for expiring accepted offers:', error);
+    throw error;
   } finally {
     client.release();
   }
-});
+};
 
-console.log('Cron jobs scheduled.');
+if (process.env.ENABLE_INPROCESS_CRON !== 'false') {
+  cron.schedule('0 0 * * *', expireAcceptedOffers);
+  console.log('Cron jobs scheduled.');
+}
+
+module.exports = { expireAcceptedOffers };
