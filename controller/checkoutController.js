@@ -52,8 +52,8 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     mode: 'payment',
-    success_url: `${process.env.FRONTEND_URL || 'https://kisanchoice.bhaweshpanwar.xyz'}/orders/success`,
-    cancel_url: `${process.env.FRONTEND_URL || 'https://kisanchoice.bhaweshpanwar.xyz'}/cart`,
+    success_url: `${process.env.FRONTEND_URL || 'https://heroic-dragon-0b1a27.netlify.app'}/orders`,
+    cancel_url: `${process.env.FRONTEND_URL || 'https://heroic-dragon-0b1a27.netlify.app'}/cart`,
     client_reference_id: order_id,
     customer_email: req.user.email,
     line_items: cartItems.map((item) => ({
